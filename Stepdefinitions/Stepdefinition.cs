@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 using TechTalk.SpecFlow;
 using PersonalDev.PageObjects;
 using OpenQA.Selenium.Interactions;
@@ -61,7 +62,7 @@ namespace PersonalDev.Stepdefinitions
         [When(@"I navigate to the restrictions page")]
         public void WhenINavigateToTheRestrictionsPage()
         {
-            Sleep(2);
+            wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//*[@id='tools-menu-trigger']/span/span")));
             po.restrictionsmenu.Click();
             Assert.IsTrue(po.restrictionstxt.Text.Contains(Config.ReadItem("TestData.json", "restrictions")));
             po.restrictionstxt.Click();
@@ -75,7 +76,7 @@ namespace PersonalDev.Stepdefinitions
             Actions hover = action.MoveToElement(po.restrictionstxt1).Click().SendKeys(Keys.ArrowUp + Keys.ArrowUp + Keys.Enter);
             hover.Build().Perform();
             Assert.IsTrue(po.apply.GetAttribute("innerHTML").Contains(Config.ReadItem("TestData.json", "apply")));
-            wait.Until(Driver => Driver.FindElement(By.XPath("//*[@id='com-atlassian-confluence']/div[2]/div[3]/div/div[3]/div[2]/div/div/div[2]/footer/div/div[2]/button/span/span")));
+            wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//*[@id='com-atlassian-confluence']/div[2]/div[3]/div/div[3]/div[2]/div/div/div[2]/footer/div/div[2]/button/span/span")));
             po.apply.Click();
         }
 
@@ -103,7 +104,7 @@ namespace PersonalDev.Stepdefinitions
         public void WhenIChooseTheUser()
         {
 
-            wait.Until(Driver => Driver.FindElement(By.XPath("//*[@id='com-atlassian-confluence']/div[2]/div[3]/div/div[3]/div[2]/div/div/div[1]/div/div/div[2]/div/div/div[1]/div/div/div/div[1]")));
+            wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.XPath("//*[@id='com-atlassian-confluence']/div[2]/div[3]/div/div[3]/div[2]/div/div/div[1]/div/div/div[2]/div/div/div[1]/div/div/div/div[1]")));
             Actions action = new Actions(Driver);
             Actions select = action.MoveToElement(po.usergroup).MoveToElement(Driver.FindElement(By.XPath("//*[@id='com-atlassian-confluence']/div[2]/div[3]/div/div[3]/div[2]/div/div/div[1]/div/div/div[2]/div/div/div[1]/div/div/div/div[1]"))).Click();
             select.Build().Perform();
@@ -126,7 +127,7 @@ namespace PersonalDev.Stepdefinitions
         [When(@"I choose the permission to a specific user")]
         public void WhenIChooseThePermissionToASpecificUser()
         {
-            wait.Until(Driver => Driver.FindElement(By.CssSelector("div.css-11e7u0k.e1er2gfe2")));
+            wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.CssSelector("div.css-11e7u0k.e1er2gfe2")));
             Actions action = new Actions(Driver);
             Actions hover = action.MoveToElement(po.restrictionstxt1).Click().SendKeys(Keys.ArrowDown + Keys.Enter);
             hover.Build().Perform();
